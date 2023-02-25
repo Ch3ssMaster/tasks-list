@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 /* Habilitar strictQuery para que no se puedan hacer consultas 
 con campos que no existen en el modelo*/
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 // importar la librería cors, para habilitar el acceso a la API desde cualquier origen
 const cors = require("cors");
 // importar las rutas
@@ -35,7 +35,7 @@ mongoose
   .then(() => console.log("Successfully connected to the database!"))
   .catch((err) => console.log(err));
 // escuchar los eventos de error, para manejar posibles errores después de la conexión
-mongoose.connection.on('error', err => {
+mongoose.connection.on("error", (err) => {
   console.log(err);
 });
 // habilitar las rutas
@@ -44,7 +44,7 @@ app.use("/", tasks);
 // levantar el servidor
 // escucha las conexiones para el puerto (y host especificados)
 // devuelve un objeto http.Server
-app.listen(process.env.PORT, () => {
+module.exports = app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
   console.log(`Token: ${generateToken()}`);
 });

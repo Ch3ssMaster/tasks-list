@@ -60,11 +60,11 @@ const updateTask = async (req, res) => {
   try {
     const { title, done } = req.body;
     // si no se envía el título
-    if (!title) {
+    if (!title && !done) {
       return res.status(400).json({
         status: "failed",
         data: null,
-        error: "Title is required",
+        error: "Some data to update is required",
       });
     }
     // si no existe la tarea a actualizar

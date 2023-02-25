@@ -2,8 +2,8 @@
 const jwt = require("jsonwebtoken");
 
 const generateToken = () => {
-  // generar token, con una duración de 3 días
-  const token = jwt.sign({}, process.env.TOKEN_SECRET, { expiresIn: "3d" });
+  // generar token, con una duración de 15 días
+  const token = jwt.sign({}, process.env.TOKEN_SECRET, { expiresIn: "15d" });
   return token;
 };
 
