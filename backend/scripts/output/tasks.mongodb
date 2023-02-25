@@ -1,0 +1,4 @@
+use('tasks-list')
+db.tasks.insertMany(
+	[{"title":"eum modi odit","done":true},{"title":"saepe quidem ab","done":true},{"title":"quis necessitatibus animi","done":false},{"title":"odit fuga saepe","done":true},{"title":"dicta voluptates fuga","done":true},{"title":"cum quibusdam laudantium","done":true},{"title":"praesentium minima optio","done":false},{"title":"animi aliquid ipsam","done":false},{"title":"id nihil nesciunt","done":true},{"title":"eius deserunt ab","done":false}]
+)
