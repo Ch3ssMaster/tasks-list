@@ -12,6 +12,8 @@ mongoose.set('strictQuery', true);
 const cors = require("cors");
 // importar las rutas
 const tasks = require("./routes/taskRoutes");
+// importar el generador de token
+const generateToken = require("./lib/utils");
 
 // leer las variables de entorno
 dotenv.config();
@@ -44,4 +46,5 @@ app.use("/", tasks);
 // devuelve un objeto http.Server
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
+  console.log(`Token: ${generateToken()}`);
 });
