@@ -5,6 +5,11 @@ main {
     padding: 2em 3em;
 }
 
+main > * {
+    max-width: 600px;
+    margin: auto;
+}
+
 .task-form {
     /* https://getcssscan.com/css-box-shadow-examples */
     /* 57 by Facebook */

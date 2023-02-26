@@ -1,38 +1,51 @@
 import { useEffect } from "react";
 import useFetch from "./hooks/useFetch";
-import HourGlass from "./components/UI/Spinners/HourGlass";
+import HourGlass from "./components/UI/Spinner/HourGlass";
 import TasksList from "./components/Tasks/TasksList";
-import TaskForm from "./components/Tasks/TaskForm";
+import TasksForm from "./components/Tasks/TasksForm";
 import classes from "./App.module.css";
 
 const App = () => {
   const { pending, error, tasks, fetchTasksHandler } = useFetch();
 
-  const addTaskHandler = (enteredText) => {
-    // TODO
+  const addTaskHandler = (body) => {
+    // enviar la petición POST
+    fetchTasksHandler("POST", body);
   };
 
-  const deleteItemHandler = (taskId) => {
-    // TODO
+  const deleteItemHandler = (id) => {
+    // eliminar la tarea
+    fetchTasksHandler("DELETE", {}, id);
   };
 
-  const updateItemHandler = (taskId, taskText) => {
-    // TODO
+  const updateItemHandler = (body, id) => {
+    // actualizar la tarea
+    fetchTasksHandler("PATCH", body, id);
   };
 
   useEffect(() => {
-    // TODO
-  });
+    fetchTasksHandler();
+  }, []);
 
   return (
     <main>
       <section className={classes["task-form"]}>
-        {/* TODO: add form component */}
+        <TasksForm onAddTask={addTaskHandler} />
       </section>
-      {/* { TODO: add spinner} */}
+      {
+        // mientras se carga la lista de tareas, se muestra el spinner
+        pending && <HourGlass />
+      }
       <section className={classes["tasks-content"]}>
         {
-          //   TODO: add tasks list component
+          // si hay tareas, y no hay errores, y no está cargando, se muestran las tareas
+          !pending && !error && tasks.length > 0 && (
+            <TasksList
+              items={tasks}
+              onDeleteItem={deleteItemHandler}
+              onUpdateItem={updateItemHandler}
+            />
+          )
         }
         {
           // TODO: Add no tasks advice

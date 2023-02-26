@@ -3,11 +3,12 @@ import Item from './Item';
 const TasksList = props => {
   return (
     <ul className="task-list">
-      {Object.keys(props.items).map((key, index) => (
+      {Object.values(props.items).map((item,index) => (
         <Item
-          key={key}
-          id={key}
-          title={props.items[key].title}
+          key={item._id}
+          id={item._id}
+          title={item.title}
+          done={item.done}
           onDelete={props.onDeleteItem}
           onEdit={props.onEditItem}
           even={(index % 2) === 0}

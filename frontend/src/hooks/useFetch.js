@@ -1,5 +1,4 @@
 import { useState } from "react";
-// importar la clase Fetch
 import Fetch from "../utils/Fetch";
 
 const useFetch = () => {
@@ -30,12 +29,14 @@ const useFetch = () => {
         case "DELETE":
           data = await Fetch.delete(id);
           break;
+        default:
+          throw new Error("Not a valid method");
       }
 
       /* si el método es GET, se actualiza la lista de tareas
       si no, se vuelve a hacer una petición GET para actualizar la lista */
       if (method === "GET") {
-        setNewTask(data);
+        setNewTask(data.data);
       } else {
         fetchTasksHandler();
       }
@@ -44,7 +45,9 @@ const useFetch = () => {
         message: error.message || "Something went wrong!",
       });
     }
-    setPending(false);
+    setTimeout(() => {
+      setPending(false);
+    }, 500);
   };
 
   return { pending, error, tasks, fetchTasksHandler };
