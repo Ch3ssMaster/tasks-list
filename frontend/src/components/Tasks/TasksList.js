@@ -10,7 +10,7 @@ const TasksList = props => {
           title={item.title}
           done={item.done}
           onDelete={props.onDeleteItem}
-          onEdit={props.onEditItem}
+          onEdit={props.onUpdateItem}
           even={(index % 2) === 0}
         />
       ))}
