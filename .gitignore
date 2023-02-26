@@ -19,3 +19,5 @@ typings/
 .env
 .env.test
 
+# production
+/build*
