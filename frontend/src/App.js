@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import useFetch from "./hooks/useFetch";
 import HourGlass from "./components/UI/Spinners/HourGlass";
+import TasksList from "./components/Tasks/TasksList";
+import TaskForm from "./components/Tasks/TaskForm";
 import classes from "./App.module.css";
 
 const App = () => {

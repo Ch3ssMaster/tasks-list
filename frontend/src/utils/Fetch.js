@@ -26,6 +26,10 @@ export default class Fetch {
         "auth-token": TOKEN,
       },
     });
+    // manejar error
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
     return data;
   }
@@ -47,6 +51,10 @@ export default class Fetch {
       },
       body: JSON.stringify(body),
     });
+    // manejar error
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
     return data;
   }
@@ -69,6 +77,10 @@ export default class Fetch {
       },
       body: JSON.stringify(body),
     });
+    // manejar error
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
     return data;
   }
@@ -89,6 +101,10 @@ export default class Fetch {
         "auth-token": TOKEN,
       },
     });
+    // manejar error
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
     return data;
   }
