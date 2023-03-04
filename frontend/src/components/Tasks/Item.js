@@ -33,9 +33,15 @@ const Item = (props) => {
   };
 
   const handleKeyPress = (event) => {
+    // si se pulsa Enter o Escape se guarda el título
     if (event.key === "Enter" || event.key === "Escape") {
       saveHandler();
     }
+    // si se pulsa Supr y el modo edición está habilidado vaciar el título
+    if (event.key === "Delete" && isEditing) {
+      titleRef.current.textContent = "";
+    }
+
   };
 
   return (

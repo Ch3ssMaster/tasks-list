@@ -50,7 +50,7 @@ const App = () => {
         {
           // si no hay tareas, y no hay errores, y no está cargando, se muestra el mensaje de que no hay tareas
           !pending && !error && tasks.length === 0 && (
-            <p className={classes["no-tasks"]}>¡No hay tareas!</p>
+            <p className={classes["no-tasks"]}>No pending tasks!</p>
           )
         }
         {
