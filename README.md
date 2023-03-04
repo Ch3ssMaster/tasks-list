@@ -48,7 +48,7 @@ This will generate a .mongodb file, in the path:
 
 That you can run with a click from the VS Code plugin playground.
 
-## Running the tests (TODO)
+## Running the tests
 
 Unit tests have been carried out with the JEST library, both on the front end and on the back end.
 
@@ -66,11 +66,23 @@ To run the tests, execute the following command:
 npm run test
 ```
 
-### Frontend tests (TODO)
+### Frontend tests
 
-Checks if the best practices and the right coding style has been used.
+To test the frontend, the libraries provided by `create-react-app` have been used.
 
-    Give an example
+Additionally, version `0.6.5` of the `jest-watch-typeahead` library has been installed. The current version is not compatible with react-scripts 5.0.1.
+
+In case you want to manually install the library, run the following command:
+
+```bash
+npm i -D --exact jest-watch-typeahead@0.6.5
+```
+
+To run the tests, execute the following command:
+
+```bash
+npm test
+```
 
 ## Deployment (TODO)
 
