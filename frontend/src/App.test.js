@@ -35,7 +35,7 @@ describe("App", () => {
     expect(screen.getByRole("button")).toHaveTextContent("Save");
   });
   // verificar de forma asíncrona que hay elementos de lista
-  it("App contains a list of tasks or a paragraph with the text 'No pending tasks!'", async () => {
+  it("App contains a list of tasks'", async () => {
     render(<App />);
     const list = await screen.findByRole("list");
     expect(list).toBeInTheDocument();
@@ -137,15 +137,16 @@ describe("App", () => {
   it("Delete all tasks and verify that the list is empty", async () => {
     render(<App />);
     let list = await screen.findByRole("list");
-    const deleteButton =
-      list.firstChild.firstChild.nextSibling.nextSibling.nextSibling;
     // obtener el número de elementos de la lista y eliminarlos uno a uno
     let numberOfTasks = list.children.length;
-    for (let i = 0; i < numberOfTasks; i++) {
+    while (numberOfTasks > 0) {
+      list = await screen.findByRole("list");
+      numberOfTasks = list.children.length;
+      let deleteButton =
+      list.firstChild.firstChild.nextSibling.nextSibling.nextSibling;
       userEvent.click(deleteButton);
-      // evitar la recarga si es el último elemento
-      if (i < numberOfTasks - 1) {
-        list = await screen.findByRole("list");
+      if (numberOfTasks === 1) {
+        break;
       }
     }
     // encontrar un párrafo con el texto "No pending tasks!"
