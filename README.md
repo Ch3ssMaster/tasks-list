@@ -66,7 +66,7 @@ To run the tests, execute the following command:
 npm run test
 ```
 
-### Style test
+### Frontend tests (TODO)
 
 Checks if the best practices and the right coding style has been used.
 

@@ -48,10 +48,14 @@ const App = () => {
           )
         }
         {
-          // TODO: Add no tasks advice
+          // si no hay tareas, y no hay errores, y no está cargando, se muestra el mensaje de que no hay tareas
+          !pending && !error && tasks.length === 0 && (
+            <p className={classes["no-tasks"]}>No pending tasks!</p>
+          )
         }
         {
-          //   TODO: Add error message
+          // si hay errores, se muestra el mensaje de error
+          error && <p className={classes["error"]}>{error.message}</p>
         }
       </section>
     </main>

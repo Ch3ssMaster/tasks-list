@@ -20,7 +20,7 @@ const Item = (props) => {
     // si el título por props es disitinto al título por referencia
     if (props.title !== titleRef.current.textContent) {
       props.onEdit(
-        { title: titleRef.current.textContent, done: false },
+        { title: titleRef.current.textContent, done: props.done },
         props.id
       );
     }
