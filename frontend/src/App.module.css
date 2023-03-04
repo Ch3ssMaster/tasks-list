@@ -24,3 +24,16 @@ main > * {
     /* #70 by box-shadows.co */
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
+
+.no-tasks, .error {
+    padding: 1em;
+    text-align: center;
+    /* color de texto informativo*/
+    color: #339900;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.error {
+    /* color de texto de error */
+    color: #FF0000;
+}
