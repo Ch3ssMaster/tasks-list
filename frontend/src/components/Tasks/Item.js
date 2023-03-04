@@ -35,13 +35,17 @@ const Item = (props) => {
   const handleKeyPress = (event) => {
     // si se pulsa Enter o Escape se guarda el título
     if (event.key === "Enter" || event.key === "Escape") {
-      saveHandler();
+      // si está vacío el título se elimina la tarea
+      if (titleRef.current.textContent.trim() === "") {
+        deleteHandler();
+      } else {
+        saveHandler();
+      }
     }
     // si se pulsa Supr y el modo edición está habilidado vaciar el título
     if (event.key === "Delete" && isEditing) {
       titleRef.current.textContent = "";
     }
-
   };
 
   return (
@@ -56,7 +60,9 @@ const Item = (props) => {
         suppressContentEditableWarning={true}
         onBlur={saveHandler}
         ref={titleRef}
-        className={`${classes.title} ${isEditing && classes["edit-mode"]} ${props.done && classes.isDone}`}
+        className={`${classes.title} ${isEditing && classes["edit-mode"]} ${
+          props.done && classes.isDone
+        }`}
       >
         {props.title}
       </div>
