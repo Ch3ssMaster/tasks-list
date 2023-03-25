@@ -1,4 +1,12 @@
 "use strict";
+/**
+ * @file server.ts
+ * @description Punto de entrada de la aplicación. Crea el servidor y establece las rutas.
+ * @version 1.0.0
+ * @license MIT
+ * @author Antonio Cebrián Mesa
+ * @date 25/03/2023
+ */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -26,7 +34,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Archivo principal de la aplicación, punto de entrada
 // importar la librería express, para crear el servidor
 const express_1 = __importDefault(require("express"));
 // importar la librería path, para manejar rutas de archivos y directorios
@@ -41,9 +48,9 @@ mongoose.set("strictQuery", true);
 // importar la librería cors, para habilitar el acceso a la API desde cualquier origen
 const cors_1 = __importDefault(require("cors"));
 // importar las rutas
-const tasks = require("./routes/taskRoutes");
+const taskRoutes_1 = __importDefault(require("./routes/taskRoutes"));
 // importar el generador de token
-const generateToken = require("./lib/utils");
+const utils_1 = __importDefault(require("./lib/utils"));
 // crear el servidor
 const app = (0, express_1.default)();
 // leer las variables de entorno
@@ -56,18 +63,15 @@ app.use((0, cors_1.default)());
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => console.log("Successfully connected to the database!"))
-    .catch((err) => console.log(err));
-// escuchar los eventos de error, para manejar posibles errores después de la conexión
-mongoose.connection.on("error", (err) => {
+    .catch((err) => {
     console.log(err);
-    throw err;
 });
 // habilitar las rutas
-app.use("/", tasks);
+app.use("/", taskRoutes_1.default);
 // levantar el servidor
 // escucha las conexiones para el puerto (y host especificados)
 // devuelve un objeto http.Server
 module.exports = app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
-    console.log(`Token: ${generateToken()}`);
+    console.log(`Token: ${(0, utils_1.default)()}`);
 });

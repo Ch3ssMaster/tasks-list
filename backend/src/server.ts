@@ -1,4 +1,12 @@
-// Archivo principal de la aplicación, punto de entrada
+/**
+ * @file server.ts
+ * @description Punto de entrada de la aplicación. Crea el servidor y establece las rutas.
+ * @version 1.0.0
+ * @license MIT
+ * @author Antonio Cebrián Mesa
+ * @date 25/03/2023
+ */
+
 // importar la librería express, para crear el servidor
 import express from "express";
 // importar la librería path, para manejar rutas de archivos y directorios
@@ -7,16 +15,15 @@ import * as path from "path";
 import * as dotenv from "dotenv";
 // importar la librería mongoose, para conectarnos a la base de datos
 import * as mongoose from "mongoose";
-import { MongoError } from "mongodb";
 /* Habilitar strictQuery para que no se puedan hacer consultas 
 con campos que no existen en el modelo*/
 mongoose.set("strictQuery", true);
 // importar la librería cors, para habilitar el acceso a la API desde cualquier origen
 import cors from "cors";
 // importar las rutas
-const tasks = require("./routes/taskRoutes");
+import tasks from "./routes/taskRoutes";
 // importar el generador de token
-const generateToken = require("./lib/utils");
+import generateToken from "./lib/utils";
 
 // crear el servidor
 const app = express();
@@ -30,12 +37,10 @@ app.use(cors());
 mongoose
   .connect(process.env.MONGO_URI as string)
   .then(() => console.log("Successfully connected to the database!"))
-  .catch((err) => console.log(err));
-// escuchar los eventos de error, para manejar posibles errores después de la conexión
-mongoose.connection.on("error", (err: MongoError) => {
-  console.log(err);
-  throw err;
-});
+  .catch((err: any) => {
+    console.log(err);
+  });
+
 // habilitar las rutas
 app.use("/", tasks);
 

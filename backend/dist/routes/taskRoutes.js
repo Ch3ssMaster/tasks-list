@@ -1,4 +1,13 @@
 "use strict";
+/**
+ * @file taskRoutes.ts
+ * @description Archivo que contiene las rutas de la API.
+ * @module routes/taskRoutes
+ * @requires express
+ * @requires taskController
+ * @requires auth
+ *
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

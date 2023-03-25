@@ -84,6 +84,17 @@ To run the tests, execute the following command:
 npm test
 ```
 
+## API endpoints
+
+The API endpoints are the following:
+
+| Method | Endpoint | Description   |
+| ------ | :------: | :------------ |
+| GET    |  **/**   | Get all tasks |
+| POST   |  **/**   | Add a task    |
+| PATCH  | **/:id** | Update a task |
+| DELETE | **/:id** | Delete a task |
+
 ## Deployment (TODO)
 
 Add additional notes to deploy this on a live system

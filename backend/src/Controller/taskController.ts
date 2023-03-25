@@ -1,6 +1,16 @@
-import Task from "../Model/taskModel";
+/**
+ * @file taskController.ts
+ * @description Archivo que contiene la lógica de los endpoints de la API.
+ * @module controllers/taskController
+ * @requires express
+ * @requires taskModel
+ * 
+ */
+
 // importar los objetos request y response de express
 import { Request, Response } from "express";
+// importar el modelo de datos
+import Task from "../Model/taskModel";
 
 // definir los tipos de datos de entrada y salida
 interface ITasks {

@@ -19,6 +19,7 @@
     "typescript": "^5.0.2"
   },
   "scripts": {
+    "build": "npx tsc",
     "start": "node dist/server.js",
     "dev": "nodemon server.js",
     "mock": "node scripts/mockTasks.js tasks-list tasks",
