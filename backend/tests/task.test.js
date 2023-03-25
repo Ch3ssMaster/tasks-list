@@ -11,7 +11,7 @@ require("dotenv").config();
 
 // incluir el token para las pruebas
 const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzczNDI3NTQsImV4cCI6MTY3NzYwMTk1NH0.x1S0V3UpKKqHc84VLw4Xj7DNN7dh5VdeR7kmL5rR6D8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Nzk3NDY1NDgsImV4cCI6MTY4MTA0MjU0OH0.r26ygmMi4jt7YDlgRNKH6L_w-Ft1GK97dfR8EXjvZus";
 const EXPIRED_TOKEN = jwt.sign({}, process.env.TOKEN_SECRET, {
   expiresIn: "0",
 });
