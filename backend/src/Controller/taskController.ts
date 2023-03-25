@@ -1,6 +1,12 @@
-const Task = require("../Model/taskModel");
+import Task from "../Model/taskModel";
+// importar los objetos request y response de express
+import { Request, Response } from "express";
 
-const getTasks = async (req, res) => {
+// definir los tipos de datos de entrada y salida
+interface ITasks {
+  (req: Request, res: Response): void;
+}
+const getTasks: ITasks = async (req, res) => {
   try {
     const data = await Task.find({});
     // si no hay tareas
@@ -17,7 +23,7 @@ const getTasks = async (req, res) => {
       data,
       error: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       status: "failed",
       data: null,
@@ -26,7 +32,7 @@ const getTasks = async (req, res) => {
   }
 };
 
-const createTask = async (req, res) => {
+const createTask: ITasks = async (req, res) => {
   try {
     const { title, done } = req.body;
     // si no se envía el título
@@ -47,7 +53,7 @@ const createTask = async (req, res) => {
       data,
       error: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       status: "failed",
       data: null,
@@ -56,7 +62,7 @@ const createTask = async (req, res) => {
   }
 };
 
-const updateTask = async (req, res) => {
+const updateTask: ITasks = async (req, res) => {
   try {
     const { title, done } = req.body;
     // si no se envía el título
@@ -86,7 +92,7 @@ const updateTask = async (req, res) => {
       data,
       error: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       status: "failed",
       data: null,
@@ -95,25 +101,25 @@ const updateTask = async (req, res) => {
   }
 };
 
-const deleteTask = async (req, res) => {
+const deleteTask: ITasks = async (req, res) => {
   try {
     // si no existe la tarea a eliminar
     const task = await Task.findById(req.params.id);
     if (!task) {
-        return res.status(404).json({
-            status: "failed",
-            data: null,
-            error: "Task not found",
-        });
+      return res.status(404).json({
+        status: "failed",
+        data: null,
+        error: "Task not found",
+      });
     }
-   // eliminar la tarea
+    // eliminar la tarea
     await task.remove();
     res.status(200).json({
       status: "succeeded",
       data: null,
       error: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       status: "failed",
       data: null,
@@ -122,7 +128,7 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getTasks,
   createTask,
   updateTask,

@@ -1,42 +1,40 @@
 // Archivo principal de la aplicación, punto de entrada
 // importar la librería express, para crear el servidor
-const express = require("express");
+import express from "express";
+// importar la librería path, para manejar rutas de archivos y directorios
+import * as path from "path";
 // importar la librería dotenv, para leer las variables de entorno
-const dotenv = require("dotenv");
+import * as dotenv from "dotenv";
 // importar la librería mongoose, para conectarnos a la base de datos
-const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
+import { MongoError } from "mongodb";
 /* Habilitar strictQuery para que no se puedan hacer consultas 
 con campos que no existen en el modelo*/
 mongoose.set("strictQuery", true);
 // importar la librería cors, para habilitar el acceso a la API desde cualquier origen
-const cors = require("cors");
+import cors from "cors";
 // importar las rutas
 const tasks = require("./routes/taskRoutes");
 // importar el generador de token
 const generateToken = require("./lib/utils");
 
-// leer las variables de entorno
-dotenv.config();
 // crear el servidor
 const app = express();
+// leer las variables de entorno
+dotenv.config({ path: path.join(__dirname, "../.env") });
 // habilitar el uso de json en el body
 app.use(express.json());
 // habilitar el uso de cors
 app.use(cors());
 // conectar a la base de datos
 mongoose
-  .connect(process.env.MONGO_URI, {
-    // para evitar warnings con las URL de conexión, aplica el nuevo motor de análisis de URL
-    useNewUrlParser: true,
-    /* para evitar warnings con la topología de la base de datos, 
-    aplica el nuevo motor de detección y monitoreo de servidores */
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI as string)
   .then(() => console.log("Successfully connected to the database!"))
   .catch((err) => console.log(err));
 // escuchar los eventos de error, para manejar posibles errores después de la conexión
-mongoose.connection.on("error", (err) => {
+mongoose.connection.on("error", (err: MongoError) => {
   console.log(err);
+  throw err;
 });
 // habilitar las rutas
 app.use("/", tasks);
