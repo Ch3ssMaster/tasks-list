@@ -1,6 +1,19 @@
 import { SERVER_API_URL, TOKEN } from "../config/api.constants";
 
 /**
+ * @interface ITask
+ * @description Interfaz para definir el tipo de datos de una tarea
+ * @property {string} title Título de la tarea
+ * @property {boolean} done Estado de la tarea
+ * 
+ */
+
+interface ITask {
+  title: string;
+  done: boolean;
+}
+
+/**
  * @class Fetch
  * @description Clase para gestionar las peticiones HTTP a la API mediante token
  * @example
@@ -20,7 +33,7 @@ export default class Fetch {
    *
    * @returns {Promise} Devuelve un objeto Promise
    */
-  static async get() {
+  static async get(): Promise<any> {
     const response = await fetch(`${SERVER_API_URL}`, {
       headers: {
         "auth-token": TOKEN,
@@ -42,7 +55,7 @@ export default class Fetch {
    *
    * @returns {Promise} Devuelve un objeto Promise
    */
-  static async post(body) {
+  static async post(body: ITask): Promise<any> {
     const response = await fetch(`${SERVER_API_URL}`, {
       method: "POST",
       headers: {
@@ -68,7 +81,7 @@ export default class Fetch {
    *
    * @returns {Promise} Devuelve un objeto Promise
    */
-  static async update(body, id) {
+  static async update(body: ITask, id: string): Promise<any> {
     const response = await fetch(`${SERVER_API_URL}${id}`, {
       method: "PATCH",
       headers: {
@@ -93,7 +106,7 @@ export default class Fetch {
    *
    * @returns {Promise} Devuelve un objeto Promise
    */
-  static async delete(id) {
+  static async delete(id: string): Promise<any> {
     const response = await fetch(`${SERVER_API_URL}${id}`, {
       method: "DELETE",
       headers: {

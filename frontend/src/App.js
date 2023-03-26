@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useFetch from "./hooks/useFetch";
-import HourGlass from "./components/UI/Spinner/HourGlass";
+import HourGlass from "./components/UI/Spinner/HourGlass.tsx";
 import TasksList from "./components/Tasks/TasksList";
 import TasksForm from "./components/Tasks/TasksForm";
 import classes from "./App.module.css";
