@@ -1,23 +1,30 @@
 import { render, screen } from "@testing-library/react";
 import TasksList from "./TasksList";
 
-let tasks = [];
-let deleteItemHandler;
-let updateItemHandler;
+type TaskList = {
+  _id: string;
+  title: string;
+  done: boolean;
+}
+let tasks = [{ _id: "", title: "", done: false } as TaskList];
+let deleteItemHandler = function (id: string): void {
+  console.log(id);
+};
+let updateItemHandler = function (task: { title: string; done: boolean; }, id: string): void {
+  console.log(task, id);
+};
 // antes de cada test se ejecuta esta función
 beforeEach(() => {
   // mock de las tareas
   tasks = [
     {
-      id: "60f1f9b0b9b5a40015b1b1b1",
+      _id: "60f1f9b0b9b5a40015b1b1b1",
       title: "Tarea 1",
-      description: "Descripción de la tarea 1",
       done: false,
     },
     {
-      id: "60f1f9b0b9b5a40015b1b1b2",
+      _id: "60f1f9b0b9b5a40015b1b1b2",
       title: "Tarea 2",
-      description: "Descripción de la tarea 2",
       done: false,
     },
   ];

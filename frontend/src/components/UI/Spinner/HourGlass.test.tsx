@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HourGlass from "./HourGlass.tsx";
+import HourGlass from "./HourGlass";
 
 // verificar que el componente HourGlass se renderice
 describe("HourGlass", () => {

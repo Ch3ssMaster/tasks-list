@@ -20,7 +20,7 @@ type TasksListProps = {
 
 const TasksList = (props:TasksListProps): JSX.Element => {
   return (
-    <ul className="task-list">
+    <ul className="task-list" role='list'>
       {Object.values(props.items).map((item,index) => (
         <Item
           key={item._id}

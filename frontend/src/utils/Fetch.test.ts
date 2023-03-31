@@ -23,7 +23,7 @@ describe("Fetch", () => {
   });
   // verificar que el método post devuelva un objeto, con los campos id, title y done
   it("post method returns an object", async () => {
-    const response = await Fetch.post({ title: "test" });
+    const response = await Fetch.post({ title: "test", done: false });
     expect(response.data).toHaveProperty("_id");
     expect(response.data).toHaveProperty("title");
     expect(response.data).toHaveProperty("done");
@@ -45,11 +45,11 @@ describe("Fetch", () => {
   // comprobar que devuelve un error, en caso de no incluir el id
   it("update method returns an error if id is not provided", async () => {
     try {
-      const response = await Fetch.update({
+      const response = await Fetch.update({       
         title: "Updated Task",
         done: true,
-      });
-    } catch (error) {
+      }, "123");
+    } catch (error: any) {
       expect(error.message).toMatch("HTTP error! status: 400");
     }
   });
@@ -66,8 +66,8 @@ describe("Fetch", () => {
   // comprobar que el método delete devuelve un error, en caso de no incluir el id
   it("delete method returns an error if id is not provided", async () => {
     try {
-      const response = await Fetch.delete();
-    } catch (error) {
+      const response = await Fetch.delete("123");
+    } catch (error: any) {
       expect(error.message).toMatch("HTTP error! status: 400");
     }
   });

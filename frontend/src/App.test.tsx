@@ -45,11 +45,11 @@ describe("App", () => {
   it("App contains a list of tasks with a contenteditable div", async () => {
     render(<App />);
     const list = await screen.findByRole("list");
-    expect(list.firstChild.firstChild).toHaveAttribute(
+    expect((list.firstChild as ChildNode).firstChild).toHaveAttribute(
       "contenteditable",
       "true"
     );
-    expect(list.firstChild.firstChild).toHaveTextContent(/.+/);
+    expect((list.firstChild as ChildNode).firstChild).toHaveTextContent(/.+/);
   });
   /* verificar que hay un elemento span con la clase done , 
   otro con la clase edit , 
@@ -57,15 +57,15 @@ describe("App", () => {
   it("App contains a list of tasks with done, edit and delete buttons", async () => {
     render(<App />);
     const list = await screen.findByRole("list");
-    expect(list.firstChild.firstChild.nextSibling).toHaveClass("done", {
+    expect(((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling).toHaveClass("done", {
       exact: false,
     });
-    expect(list.firstChild.firstChild.nextSibling.nextSibling).toHaveClass(
+    expect((((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling as ChildNode).nextSibling).toHaveClass(
       "edit",
       { exact: false }
     );
     expect(
-      list.firstChild.firstChild.nextSibling.nextSibling.nextSibling
+      ((((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling as ChildNode).nextSibling as ChildNode).nextSibling
     ).toHaveClass("delete", { exact: false });
   });
 
@@ -76,10 +76,10 @@ describe("App", () => {
   it("App contains a list of tasks with a contenteditable div with focus", async () => {
     render(<App />);
     const list = await screen.findByRole("list");
-    const editButton = list.firstChild.firstChild.nextSibling.nextSibling;
-    userEvent.click(editButton);
-    expect(list.firstChild.firstChild).toHaveFocus();
-    expect(list.firstChild.firstChild).toHaveClass("edit-mode", {
+    const editButton = (((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling as ChildNode).nextSibling;
+    userEvent.click(editButton as HTMLElement);
+    expect((list.firstChild as ChildNode).firstChild).toHaveFocus();
+    expect((list.firstChild as ChildNode).firstChild).toHaveClass("edit-mode", {
       exact: false,
     });
   });
@@ -92,16 +92,16 @@ describe("App", () => {
   it("Change, save and verify the new text into the first task", async () => {
     render(<App />);
     let list = await screen.findByRole("list");
-    const editButton = list.firstChild.firstChild.nextSibling.nextSibling;
-    userEvent.click(editButton);
+    const editButton = (((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling as ChildNode).nextSibling;
+    userEvent.click(editButton as HTMLElement);
     // el usuario borra el texto y escribe "New Task"
     userEvent.keyboard("{del}");
-    userEvent.type(list.firstChild.firstChild, "New Task");
+    userEvent.type(list.firstChild as ChildNode).firstChild, "New Task");
     userEvent.keyboard("{enter}");
     // recargar la lista actualizada
     list = await screen.findByRole("list");
-    expect(list.firstChild.firstChild).toHaveTextContent("New Task");
-    expect(list.firstChild.firstChild).not.toHaveClass("edit-mode", {
+    expect(list.firstChild as ChildNode).firstChild).toHaveTextContent("New Task");
+    expect(list.firstChild as ChildNode).firstChild).not.toHaveClass("edit-mode", {
       exact: false,
     });
   });
