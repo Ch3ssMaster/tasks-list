@@ -1,26 +1,42 @@
 import { useState, useRef } from "react";
 import classes from "./Item.module.css";
 
-const Item = (props) => {
+//crear el tipo ItemProps
+type ItemProps = {
+  id: string;
+  title: string;
+  done: boolean;
+  onDelete: (id: string) => void;
+  onEdit: (task: { title: string; done: boolean }, id: string) => void;
+  even: boolean;
+};
+
+/**
+ *
+ * @param props: {id: string, title: string, done: boolean, onDelete: (id: string) => void, onEdit: (task: {title: string, done: boolean}, id: string) => void, even: boolean}
+ * @returns JSX.Element
+ */
+
+const Item = (props: ItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDone, setIsDone] = useState(props.done);
-  const titleRef = useRef(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   const deleteHandler = () => {
     props.onDelete(props.id);
   };
 
   const editHandler = () => {
-    titleRef.current.focus();
+    titleRef.current?.focus();
     setIsEditing(true);
   };
 
   const saveHandler = () => {
-    titleRef.current.blur();
+    titleRef?.current?.blur();
     // si el título por props es disitinto al título por referencia
-    if (props.title !== titleRef.current.textContent) {
+    if (props.title !== titleRef.current?.textContent) {
       props.onEdit(
-        { title: titleRef.current.textContent, done: props.done },
+        { title: titleRef.current?.textContent || "", done: props.done },
         props.id
       );
     }
@@ -32,11 +48,11 @@ const Item = (props) => {
     props.onEdit({ title: props.title, done: !isDone }, props.id);
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent) => {
     // si se pulsa Enter o Escape se guarda el título
     if (event.key === "Enter" || event.key === "Escape") {
       // si está vacío el título se elimina la tarea
-      if (titleRef.current.textContent.trim() === "") {
+      if (titleRef.current?.textContent?.trim() === "") {
         deleteHandler();
       } else {
         saveHandler();
@@ -44,7 +60,9 @@ const Item = (props) => {
     }
     // si se pulsa Supr y el modo edición está habilidado vaciar el título
     if (event.key === "Delete" && isEditing) {
-      titleRef.current.textContent = "";
+      if (titleRef.current !== null) {
+        titleRef.current.textContent = "";
+      }
     }
   };
 
