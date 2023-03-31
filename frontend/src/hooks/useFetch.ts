@@ -1,19 +1,26 @@
 import { useState } from "react";
 import Fetch from "../utils/Fetch";
 
-const useFetch = () => {
+/**
+ *
+ * @method useFetch
+ * @description Hook para realizar peticiones a la API
+ * @returns {Object} Devuelve un objeto con los métodos para realizar las peticiones
+ */
+
+const useFetch = (): object => {
   const [tasks, setNewTask] = useState({});
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({ message: "" });
 
   const fetchTasksHandler = async (
     method = "GET",
-    body = { text: "", done: false },
+    body = { title: "", done: false },
     id = ""
   ) => {
     try {
       setPending(true);
-      setError(null);
+      setError({ message: "" });
       let data = null;
       // switch para manejar los diferentes métodos
       switch (method) {
@@ -40,7 +47,7 @@ const useFetch = () => {
       } else {
         fetchTasksHandler();
       }
-    } catch (error) {
+    } catch (error: any) {
       setError({
         message: error.message || "Something went wrong!",
       });
@@ -50,7 +57,7 @@ const useFetch = () => {
     }, 500);
   };
 
-  return { pending, error, tasks, fetchTasksHandler };
+  return { pending, error, tasks, fetchTasksHandler } as const;
 };
 
 export default useFetch;

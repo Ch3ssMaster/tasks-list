@@ -1,24 +1,47 @@
 import { useEffect } from "react";
 import useFetch from "./hooks/useFetch";
-import HourGlass from "./components/UI/Spinner/HourGlass.tsx";
+import HourGlass from "./components/UI/Spinner/HourGlass";
 import TasksList from "./components/Tasks/TasksList";
 import TasksForm from "./components/Tasks/TasksForm";
 import classes from "./App.module.css";
 
-const App = () => {
-  const { pending, error, tasks, fetchTasksHandler } = useFetch();
+type TasksList = {
+  title: string;
+  done: boolean;
+  _id: string;
+};
 
-  const addTaskHandler = (body) => {
+type defaultTask = {
+  title: string;
+  done: boolean;
+};
+
+type defaultFetch = {
+  pending: boolean;
+  error: any;
+  tasks: TasksList[];
+  fetchTasksHandler: (
+    method?: string,
+    body?: { title: string },
+    id?: string
+  ) => void;
+};
+
+const App = () => {
+  const { pending, error, tasks, fetchTasksHandler } =
+    useFetch() as defaultFetch;
+
+  const addTaskHandler = (body: defaultTask) => {
     // enviar la petición POST
     fetchTasksHandler("POST", body);
   };
 
-  const deleteItemHandler = (id) => {
+  const deleteItemHandler = (id: string) => {
     // eliminar la tarea
-    fetchTasksHandler("DELETE", {}, id);
+    fetchTasksHandler("DELETE", { title: "" }, id);
   };
 
-  const updateItemHandler = (body, id) => {
+  const updateItemHandler = (body: defaultTask, id: string) => {
     // actualizar la tarea
     fetchTasksHandler("PATCH", body, id);
   };

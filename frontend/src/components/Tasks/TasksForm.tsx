@@ -1,26 +1,37 @@
 import { useState, useRef } from "react";
 
-
 import SubmitButton from "../UI/Button/SubmitButton";
 import classes from "./TasksForm.module.css";
 
-const TasksForm = (props) => {
+/**
+ *
+ * @param props {onAddTask: (task: {title: string, done: boolean}) => void}
+ * @returns JSX.Element
+ */
+
+type TasksFormProps = {
+  onAddTask: (task: { title: string; done: boolean }) => void;
+};
+
+const TasksForm = (props: TasksFormProps): JSX.Element => {
   const [enteredValue, setEnteredValue] = useState("");
   const [fullfilled, setIsFullfilled] = useState(true);
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const inputChangeHandler = (event) => {
-    if (event.target.value.trim().length > 0) {
+  const inputChangeHandler = (event: React.ChangeEvent) => {
+    if ((event.target as HTMLInputElement).value.trim().length > 0) {
       setIsFullfilled(true);
     }
-    setEnteredValue(event.target.value);
+    setEnteredValue((event.target as HTMLInputElement).value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     if (enteredValue.trim().length === 0) {
       setIsFullfilled(false);
-      inputRef.current.focus();
+      if (inputRef.current !== null) {
+        inputRef?.current?.focus();
+      }
       return;
     }
     props.onAddTask({ title: enteredValue, done: false });
@@ -37,7 +48,12 @@ const TasksForm = (props) => {
         <label>
           <h2>Post a Task</h2>
         </label>
-        <input ref={inputRef} type="text" onChange={inputChangeHandler} value={enteredValue} />
+        <input
+          ref={inputRef}
+          type="text"
+          onChange={inputChangeHandler}
+          value={enteredValue}
+        />
       </div>
       <SubmitButton type="submit">Save</SubmitButton>
     </form>

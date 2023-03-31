@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import classes from "./Item.module.css";
 
-//crear el tipo ItemProps
 type ItemProps = {
   id: string;
   title: string;
