@@ -96,12 +96,13 @@ describe("App", () => {
     userEvent.click(editButton as HTMLElement);
     // el usuario borra el texto y escribe "New Task"
     userEvent.keyboard("{del}");
-    userEvent.type(list.firstChild as ChildNode).firstChild, "New Task");
-    userEvent.keyboard("{enter}");
+      userEvent.type(((list.firstChild as ChildNode).firstChild as Element) , "New Task");
+    // el usuario pulsa la tecla Enter
+    userEvent.keyboard("{enter}");   
     // recargar la lista actualizada
     list = await screen.findByRole("list");
-    expect(list.firstChild as ChildNode).firstChild).toHaveTextContent("New Task");
-    expect(list.firstChild as ChildNode).firstChild).not.toHaveClass("edit-mode", {
+    expect((list.firstChild as ChildNode).firstChild).toHaveTextContent("New Task");
+    expect((list.firstChild as ChildNode).firstChild).not.toHaveClass("edit-mode", {
       exact: false,
     });
   });
@@ -111,11 +112,11 @@ describe("App", () => {
   it("Mark the first task as done", async () => {
     render(<App />);
     let list = await screen.findByRole("list");
-    const doneButton = list.firstChild.firstChild.nextSibling;
-    userEvent.click(doneButton);
+    const doneButton = ((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling;
+    userEvent.click(doneButton as HTMLElement);
     list = await screen.findByRole("list");
     // comprobar que el primer elemento de la lista tiene la clase isDone
-    expect(list.firstChild.firstChild).toHaveClass("isDone", { exact: false });
+    expect((list.firstChild as ChildNode).firstChild).toHaveClass("isDone", { exact: false });
   });
   /*  Pulsar de nuevo el botón para marcar la primera tarea como no realizada.
   Verificar que el primer elemento de la lista no tiene la clase isDone.
@@ -123,10 +124,10 @@ describe("App", () => {
   it("Mark the first task as undone", async () => {
     render(<App />);
     let list = await screen.findByRole("list");
-    const doneButton = list.firstChild.firstChild.nextSibling;
-    userEvent.click(doneButton);
+    const doneButton = ((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling;
+    userEvent.click(doneButton as HTMLElement);
     list = await screen.findByRole("list");
-    expect(list.firstChild.firstChild).not.toHaveClass("isDone", {
+    expect((list.firstChild as ChildNode).firstChild).not.toHaveClass("isDone", {
       exact: false,
     });
   });
@@ -143,8 +144,8 @@ describe("App", () => {
       list = await screen.findByRole("list");
       numberOfTasks = list.children.length;
       let deleteButton =
-      list.firstChild.firstChild.nextSibling.nextSibling.nextSibling;
-      userEvent.click(deleteButton);
+      ((((list.firstChild as ChildNode).firstChild as ChildNode).nextSibling as ChildNode).nextSibling as ChildNode).nextSibling;
+      userEvent.click(deleteButton as HTMLElement);
       if (numberOfTasks === 1) {
         break;
       }

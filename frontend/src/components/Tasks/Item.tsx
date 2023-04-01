@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import classes from "./Item.module.css";
 
 type ItemProps = {
+  key: string;
   id: string;
   title: string;
   done: boolean;
