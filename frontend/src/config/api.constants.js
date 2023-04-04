@@ -9,10 +9,14 @@ export const SERVER_PORT = "8000";
  * @example http://localhost:8000/task_id/
  * 
  */
-export const SERVER_API_URL = `${SERVER_URL}:${SERVER_PORT}/`;
+
+// URL de desarrollo
+// export const SERVER_API_URL = `${SERVER_URL}:${SERVER_PORT}/`;
+// URL de producción
+export const SERVER_API_URL = `https://tasks-list-8wv7-77szm4iwu-ch3ssmaster.vercel.app/`;
 /**
  * @constant {string} TOKEN Token de autenticación, duración de 15 días
  * 
  */
 export const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Nzk3NDY1NDgsImV4cCI6MTY4MTA0MjU0OH0.r26ygmMi4jt7YDlgRNKH6L_w-Ft1GK97dfR8EXjvZus";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoidGFzayBsaXN0IiwiaWF0IjoxNjgwNjE3MjIzLCJleHAiOjE2ODE5MTMyMjN9.rGCelwyTQ0QI1EeQUIVMIPjBvYG9c8Npp9SUKAAL_8o";
