@@ -95,9 +95,23 @@ The API endpoints are the following:
 | PATCH  | **/:id** | Update a task |
 | DELETE | **/:id** | Delete a task |
 
-## Deployment (TODO)
+## Deployment
 
-Add additional notes to deploy this on a live system
+The option chosen to deploy the application has been [Vercel](https://vercel.com/).
+
+The frontend is deployed directly through the scripts in the `package.json` file, while the backend needs a `vercel.json` file as additional configuration.
+
+For the database, [MongoDB](https://www.mongodb.com/cloud) Atlas has been used.
+
+The application will be active from today **04/04/2023** until the token expires, **15 days**, unless the frontend token is renewed.
+
+To test the backend from another client such as Thunder or Postman, it is available at the URL:
+
+- https://tasks-list-8wv7-77szm4iwu-ch3ssmaster.vercel.app/
+
+**_Test the full application online!:_**
+
+- https://tasks-list-deploy.vercel.app/
 
 ## Built With
 
